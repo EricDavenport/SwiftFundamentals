@@ -58,3 +58,24 @@ bilbo2.name = "Jake"
 bilbo2.height = 1.42
 bilbo2.homePlanet = "Saturn"
 
+/*
+ Given this bit of code that uses the Alien struct:
+
+ var charles = Alien(name: "Charles", height: 2.25, homePlanet: "Pluto")
+ var charlesFromJupiter = charles
+ charlesFromJupiter.homePlanet = "Jupiter"
+ 
+ What will the value of charles.homePlanet be after the above code run? What about the value of charlesFromJupiter.homePlanet? Why?
+ 
+ charles is a var and is mutable
+ charlesFromJupiter is the exact same thing as charles since they point to the same object
+ charlesFromJupiter.homePlanet = "Jupiter" changes cfj.homePlanet to "Jupiter"
+ ths will not change charles homePlanet because they are stll different objects
+ */
+
+var charles = Alien(name: "Charles", height: 2.25, homePlanet: "Pluto")
+var charlesFromJupiter = charles
+charlesFromJupiter.homePlanet = "Jupiter"
+
+print(charles.homePlanet)
+print(charlesFromJupiter.homePlanet)

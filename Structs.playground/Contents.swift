@@ -1,8 +1,8 @@
 import UIKit
 import Foundation
 
+// MARK: Question 1
 /*
- Question 1
  Take a look at this struct that represents an alen:
  struct Alien {
   var name: String
@@ -57,7 +57,9 @@ var bilbo2 = Alien(name: "Bilbo", height: 1.67, homePlanet: "Venus")
 bilbo2.name = "Jake"
 bilbo2.height = 1.42
 bilbo2.homePlanet = "Saturn"
+// MARK: Wrong
 
+// MARK: Question 2
 /*
  Given this bit of code that uses the Alien struct:
 
@@ -79,3 +81,90 @@ charlesFromJupiter.homePlanet = "Jupiter"
 
 print(charles.homePlanet)
 print(charlesFromJupiter.homePlanet)
+//MARK: Correct
+
+
+// MARK: Question3
+/*
+ Here's a struct that represents a bank account:
+
+ struct BankAccount {
+   var owner: String
+   var balance: Double
+   
+   func deposit(_ amount: Double) {
+     balance += amount
+   }
+   
+   func withdraw(_ amount: Double) {
+     balance -= amount
+   }
+ }
+ Does this code work? Why or why not?
+ 
+ answer before coding
+ yes code does work. the struct has mutable properties
+ the functions change only one of the two (balance)
+ the amounts in each func is a Double - the balance is a double so the func will be able to compile
+ */
+
+//struct BankAccount {
+//  var owner: String
+//  var balance: Double
+//
+//  func deposit(_ amount: Double) {
+//    balance += amount
+//  }
+//
+//  func withdraw(_ amount: Double) {
+//    balance -= amount
+//  }
+//}
+// MARK: Wrong
+
+/*
+ Solution
+ 
+ The code above does not work since the object is a struct (value-type, immutable by default) we have to mark any functions that modify internal properties with an explicit mutating keyword.
+
+ Fix the BankAccount struct so it does work.
+ 
+Retro:
+ my answer was wrong because i beieve you could mutate the properties by default -
+ the coorect fact is in a struct the properties are immutable by default and functions must be marked with mutating in the from in order to change the property values - rewrite the BankAccount struct so it does compile
+ */
+
+struct BankAccount {
+  var owner: String
+  var balance: Double
+  
+  mutating func deposit(_ amount: Double) {
+    balance += amount
+  }
+  mutating func withdraw(_ amount: Double) {
+    balance -= amount
+  }
+}
+
+var myBankAccount = BankAccount(owner: "Eric", balance: 1000.00)
+myBankAccount.deposit(400)
+print(myBankAccount.balance)
+myBankAccount.withdraw(400)
+print("\(myBankAccount.owner) has $\(myBankAccount.balance) in their account")
+
+
+/*
+ Given the code below (which should incorporate any fixes you made):
+
+ var joeAccount = BankAccount(owner: "Joe", balance: 100.0)
+ var joeOtherAccount = joeAccount
+ joeAccount.withdraw(50.0)
+ 
+ What will the value of joeAccount.balance be after the above code runs? What about the value of joeOtherAccount.balance? Why?
+ 
+ answer prior to coding:
+ jA.balance will be 50.0
+ jOA.balance will be 100.0
+ the money is withdrawn after it initialized that
+ */
+
